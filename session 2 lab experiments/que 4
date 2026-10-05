@@ -1,0 +1,20 @@
+def merge_sort(a):
+    if len(a) <= 1:
+        return a
+
+    m = len(a) // 2
+    L = merge_sort(a[:m])
+    R = merge_sort(a[m:])
+
+    return sorted_merge(L, R)
+
+def sorted_merge(L, R):
+    a = []
+    while L and R:
+        a.append(L.pop(0) if L[0] < R[0] else R.pop(0))
+    return a + L + R
+
+n = int(input())
+nums = list(map(int, input().split()))
+
+print(merge_sort(nums))
