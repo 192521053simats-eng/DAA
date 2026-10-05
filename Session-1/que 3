@@ -1,0 +1,10 @@
+a = list(map(int, input("Enter array: ").split()))
+ans = 0
+
+for i in range(len(a)):
+    s = set()
+    for j in range(i, len(a)):
+        s.add(a[j])
+        ans += len(s) ** 2
+
+print("Sum:", ans)
