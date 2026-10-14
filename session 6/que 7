@@ -1,0 +1,44 @@
+from itertools import combinations
+
+def total_value(items, values):
+    return sum(values[i] for i in items)
+
+
+def is_feasible(items, weights, capacity):
+    return sum(weights[i] for i in items) <= capacity
+
+
+def knapsack(weights, values, capacity):
+    n = len(weights)
+    max_value = 0
+    best_items = []
+
+    for r in range(n + 1):
+        for items in combinations(range(n), r):
+            if is_feasible(items, weights, capacity):
+                value = total_value(items, values)
+
+                if value > max_value:
+                    max_value = value
+                    best_items = list(items)
+
+    return best_items, max_value
+
+
+weights1 = [2, 3, 1]
+values1 = [4, 5, 3]
+capacity1 = 4
+
+weights2 = [1, 2, 3, 4]
+values2 = [2, 4, 6, 3]
+capacity2 = 6
+
+for i, (weights, values, capacity) in enumerate([
+    (weights1, values1, capacity1),
+    (weights2, values2, capacity2)
+], start=1):
+    items, value = knapsack(weights, values, capacity)
+
+    print("Test Case", i)
+    print("Optimal Selection:", items)
+    print("Total Value:", value)
